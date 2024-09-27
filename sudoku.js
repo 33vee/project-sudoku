@@ -1,3 +1,4 @@
+
 function read() {
   /**
    * Прочесть файл puzzles.txt в кодировке 'utf-8' и вернуть эти данные из функции
@@ -43,6 +44,12 @@ function isSolved() {
    * Принимает игровое поле в том формате, в котором его вернули из функции solve.
    * Возвращает булевое значение — решено это игровое поле или нет.
    */
+
+  // продумать логику этой функции:
+
+  // если в поле встретится null, должно вернуть false, в остальных случаях - true
+
+  !array.some((arr) => arr.some((el) => el === null))
 }
 
 function prettyBoard() {
@@ -52,3 +59,16 @@ function prettyBoard() {
    * Подумай, как симпатичнее его вывести.
    */
 }
+
+
+function findIndex (array)  {
+
+array.map((line) => line.map((value, index) => (value === null ? index : value))) // возвращает false, если null
+
+}
+
+
+
+
+
+
