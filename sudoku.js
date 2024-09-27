@@ -1,4 +1,6 @@
+const { log } = require("console");
 const fs = require("fs");
+
 function read() {
   const puzzle = fs.readFileSync("./puzzles.txt", "utf8").split('\n');
   return puzzle;
@@ -9,7 +11,7 @@ function read() {
 
 function madeArr() {
   const sudoku = read();
-  const firstSudoku = sudoku[0].split('');
+  const firstSudoku = sudoku[0].trim().split('');
   
   // console.log(firstSudoku);
   let res = []
@@ -18,19 +20,15 @@ function madeArr() {
     res.push(firstSudoku.slice(i, i + 9))
  
   }
-  return res.map(elArr => elArr.map(el => el === '-' ? [] : Number(el)));
+  return res.map(elArr => elArr.map(el => el === '-' ? null : Number(el)));
   
 }
+const board = madeArr()
 
 
-console.log(madeArr());
 
-function solve() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции read.
-   * Возвращает игровое поле после попытки его решить.
-   */
-}
+console.log(board);
+
 
 function isSolved() {
   /**
@@ -45,4 +43,5 @@ function prettyBoard() {
    * Выводит в консоль/терминал судоку.
    * Подумай, как симпатичнее его вывести.
    */
+  
 }
