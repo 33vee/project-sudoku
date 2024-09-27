@@ -9,10 +9,21 @@ const {
   solve,
   prettyBoard
 } = require('./sudoku')
+const massForTest = [
+  [1,4,5,8,3,2,6,7,],
+  [6,,,1,9,5,,,],
+  [,9,8,,,,,6,],
+  [8,,,,6,,,,3],
+  [4,,,8,,3,,,1],
+  [7,,,,2,,,,6],
+  [,6,,,,,2,8,],
+  [,,,4,1,9,,,5],
+  [,,,,8,,,7,9]        
+]
 
-num = 1;
+const num = 0;
 
 const playBoard = read(num);
-console.log(prettyBoard(playBoard))
-const possibleSolution = solve(playBoard);
-console.log(possibleSolution)
+console.log(prettyBoard(playBoard));
+// console.log(lineCheck(massForTest,[0,8]));
+console.log(solve(playBoard));

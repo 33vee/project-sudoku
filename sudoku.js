@@ -27,9 +27,7 @@ function read(num) {
         .reduce(
           (prev, cur, i, a) =>
             !(i % 9) ? prev.concat([a.slice(i, i + 9)]) : prev,
-          []
-        
-    );
+          []));
   }
   // fs.writeFileSync(`stats.txt`, board.join("\r"));
   const board = fullBoards[num];
@@ -48,8 +46,8 @@ function read(num) {
 }
 
 function firstBlank(mass) {
-  for (let i = 0; i < mass.length - 1; i++) {
-    for (let j = 0; j < mass.length - 1; j++) {
+  for (let i = 0; i < mass.length; i++) {
+    for (let j = 0; j < mass.length; j++) {
       if (mass[i][j] === undefined) {
         const coordinates = [i, j];
         return coordinates;
@@ -61,8 +59,8 @@ function firstBlank(mass) {
 
 function lineCheck(mass, cell){
   const line = mass[cell[0]];
-  let possibleColumnVals = [1,2,3,4,5,6,7,8,9];
-  possibleLineVals = possibleColumnVals.filter(el=> !line.includes(el));
+  let possibleLineVals = [1,2,3,4,5,6,7,8,9];
+  possibleLineVals = possibleLineVals.filter(el=> !line.includes(el));
   return possibleLineVals;
 }
 
@@ -169,31 +167,34 @@ function finalPossibleVals(mass) {
   const columnVal = columnCheck(mass, cell);  
   const squareVal = squareCheck(mass, cell);
   let possibleFinalVals = [1,2,3,4,5,6,7,8,9];
+
   possibleFinalVals = possibleFinalVals.filter(el=> linesVal.includes(el));
   possibleFinalVals = possibleFinalVals.filter(el=> columnVal.includes(el));
   possibleFinalVals = possibleFinalVals.filter(el=> squareVal.includes(el));
+
   return possibleFinalVals
 }
+
 
 function solve(testMass) {
   let testVals = finalPossibleVals(testMass);
   let cell = firstBlank(testMass);
 
-  let newPossibleFinalVals = []; 
   for (let i=0; i<testVals.length; i++){  
-    testMass[cell[0]][cell[1]] = testVals[i];
-    
-    if (firstBlank(testMass) === false){
-          return testMass
-      };  
-    
-    nextCell = firstBlank(testMass); 
-    if (testVals.length === 0){
-        return testMass;
-      };
-    
-    newPossibleFinalVals = finalPossibleVals(testMass);
-    solve(testMass, nextCell, newPossibleFinalVals);
+      testMass[cell[0]][cell[1]] = testVals[i];
+      console.log('test vals:', testVals)
+      console.log('mass change check:', prettyBoard(testMass))
+      console.log('next cycle:------')
+      
+      if (firstBlank(testMass) === false){
+            return testMass;
+        };  
+      
+      if (testVals.length === 0){
+          return testMass;
+        };
+      
+      return solve(testMass);
     
   }
    /**
@@ -209,24 +210,24 @@ function isSolved() {
    */
 }
 
-function prettyBoard() {
+function prettyBoard(mass) {
     /**
    * Принимает игровое поле в том формате, в котором его вернули из функции solve.
    * Выводит в консоль/терминал судоку.
    * Подумай, как симпатичнее его вывести.
    */
   // const renderBoard = solve();
-  const renderBoard = [
-    ["1", "-", "5", "8", "-", "2", "-", "-", "-"],
-    ["-", "9", "-", "-", "7", "6", "4", "-", "5"],
-    ["2", "-", "-", "4", "-", "-", "8", "1", "9"],
-    ["-", "1", "9", "-", "-", "7", "3", "-", "6"],
-    ["7", "6", "2", "-", "8", "3", "-", "9", "-"],
-    ["-", "-", "-", "-", "6", "1", "-", "5", "-"],
-    ["-", "-", "7", "6", "-", "-", "-", "3", "-"],
-    ["4", "3", "-", "-", "2", "-", "5", "-", "1"],
-    ["6", "-", "-", "3", "-", "8", "9", "-", "-"],
-  ];
+  // const renderBoard = [
+  //   ["1", "-", "5", "8", "-", "2", "-", "-", "-"],
+  //   ["-", "9", "-", "-", "7", "6", "4", "-", "5"],
+  //   ["2", "-", "-", "4", "-", "-", "8", "1", "9"],
+  //   ["-", "1", "9", "-", "-", "7", "3", "-", "6"],
+  //   ["7", "6", "2", "-", "8", "3", "-", "9", "-"],
+  //   ["-", "-", "-", "-", "6", "1", "-", "5", "-"],
+  //   ["-", "-", "7", "6", "-", "-", "-", "3", "-"],
+  //   ["4", "3", "-", "-", "2", "-", "5", "-", "1"],
+  //   ["6", "-", "-", "3", "-", "8", "9", "-", "-"],
+  // ];
 
   // const renderBoard = [
   //   [1, undefined, 5, 8, undefined, 2, undefined, undefined, undefined],
@@ -240,8 +241,8 @@ function prettyBoard() {
   //   [6, undefined, undefined, 3, undefined, 8, 9, undefined, undefined],
   // ];
 
-  for (let i = 0; i < renderBoard.length - 1; i++) {
-    console.log(renderBoard[i].join(" "));
+  for (let i = 0; i < mass.length - 1; i++) {
+    console.log(mass[i].join(" "));
   }
 }
 
