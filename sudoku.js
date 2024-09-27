@@ -25,3 +25,16 @@ function prettyBoard() {
    * Подумай, как симпатичнее его вывести.
    */
 }
+
+function prettyBoard() {
+  const sudoku = 
+  const sudokuEl = sudoku.map(el => el.join(' '));
+  const newSudoke = sudokuEl.join('\n')
+
+   console.log(newSudoke);
+/**
+ * Принимает игровое поле в том формате, в котором его вернули из функции solve.
+ * Выводит в консоль/терминал судоку.
+ * Подумай, как симпатичнее его вывести.
+ */
+}
