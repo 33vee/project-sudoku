@@ -25,3 +25,38 @@ function prettyBoard() {
    * Подумай, как симпатичнее его вывести.
    */
 }
+
+
+function fillNumbers(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const missNum = new Set();
+    const availableNumbers = [];
+
+    for (let j = 0; j < arr.length; j++) {
+      const value = arr[j][i];
+      if (value !== null) {
+        missNum.add(value);
+      }
+    }
+
+    for (let num = 1; num <= arr.length; num++) {
+      if (!missNum.has(num)) {
+        availableNumbers.push(num);
+      }
+    }
+
+
+    let index = 0;
+    for (let j = 0; j < arr.length; j++) {
+      if (arr[j][i] === null && index < availableNumbers.length) {
+        arr[j][i] = availableNumbers[index++];
+      }
+    }
+  }
+  return arr;
+}
+
+console.log(fillNumbers([[3, null, 7],[5, 5, null],[1, null, 2]]));
+
+
+
