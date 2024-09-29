@@ -191,27 +191,27 @@ function listNodes(arr){
   return scenarios;
 }
 
-
 function solve(current) {
-  if(current === undefined) {
-        return null}
+  if(current === undefined) 
+        {return null}
   else if(firstBlank(current).lenght === 0){
           return null;
         }
   else if(firstBlank(current) === false ){
           return current;
-        }
-
-  else {return solve(listNodes(current)[0]) ||
-               solve(listNodes(current)[1]) ||
-               solve(listNodes(current)[2]) ||
-               solve(listNodes(current)[3]) ||
-               solve(listNodes(current)[4]) ||
-               solve(listNodes(current)[5]) ||
-               solve(listNodes(current)[6]) ||     
-               solve(listNodes(current)[7]) ||         
-               solve(listNodes(current)[8]) ||
-               solve(listNodes(current)[9])                 
+        }  
+  else {return listNodes(current).reduce((acc, currentValue)=> acc || solve(currentValue), null)
+    
+              // solve(listNodes(current)[0]) ||                  
+              // solve(listNodes(current)[1]) ||
+              // solve(listNodes(current)[2]) ||
+              // solve(listNodes(current)[3]) ||
+              // solve(listNodes(current)[4]) ||
+              // solve(listNodes(current)[5]) ||
+              // solve(listNodes(current)[6]) ||     
+              // solve(listNodes(current)[7]) ||         
+              // solve(listNodes(current)[8]) ||
+              // solve(listNodes(current)[9])                 
               }
    /**
    * Принимает игровое поле в том формате, в котором его вернули из функции read.

@@ -24,7 +24,7 @@ const massForTest = [
   [,,,,8,,,7,9]        
 ]
 
-const num = 12;
+const num = 4;
 
 const playBoard = read(num);
 console.log(prettyBoard(solve(playBoard)));
