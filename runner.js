@@ -7,8 +7,11 @@ const {
   squareCheck,
   finalPossibleVals,
   solve,
+  listNodes,
   prettyBoard
+
 } = require('./sudoku')
+
 const massForTest = [
   [1,4,5,8,3,2,6,7,],
   [6,,,1,9,5,,,],
@@ -21,9 +24,7 @@ const massForTest = [
   [,,,,8,,,7,9]        
 ]
 
-const num = 0;
+const num = 12;
 
 const playBoard = read(num);
-console.log(prettyBoard(playBoard));
-// console.log(lineCheck(massForTest,[0,8]));
-console.log(solve(playBoard));
+console.log(prettyBoard(solve(playBoard)));

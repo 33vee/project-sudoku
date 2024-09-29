@@ -1,3 +1,4 @@
+const { log } = require("console");
 const fs = require("fs");
 
 const massForTest = [
@@ -46,6 +47,9 @@ function read(num) {
 }
 
 function firstBlank(mass) {
+  if (mass === undefined) {
+    return null;
+  }
   for (let i = 0; i < mass.length; i++) {
     for (let j = 0; j < mass.length; j++) {
       if (mass[i][j] === undefined) {
@@ -175,28 +179,40 @@ function finalPossibleVals(mass) {
   return possibleFinalVals
 }
 
-
-function solve(testMass) {
-  let testVals = finalPossibleVals(testMass);
-  let cell = firstBlank(testMass);
-
-  for (let i=0; i<testVals.length; i++){  
-      testMass[cell[0]][cell[1]] = testVals[i];
-      console.log('test vals:', testVals)
-      console.log('mass change check:', prettyBoard(testMass))
-      console.log('next cycle:------')
-      
-      if (firstBlank(testMass) === false){
-            return testMass;
-        };  
-      
-      if (testVals.length === 0){
-          return testMass;
-        };
-      
-      return solve(testMass);
-    
+function listNodes(arr){
+  const scenarios = [];
+  const blankCell = firstBlank(arr);
+  const valuesForBlankCell = finalPossibleVals(arr)
+  for (let i = 0; i < valuesForBlankCell.length; i++) {
+      const copy = structuredClone(arr);
+      copy[blankCell[0]][blankCell[1]] = valuesForBlankCell[i];
+      scenarios.push(copy);
   }
+  return scenarios;
+}
+
+
+function solve(current) {
+  if(current === undefined) {
+        return null}
+  else if(firstBlank(current).lenght === 0){
+          return null;
+        }
+  else if(firstBlank(current) === false ){
+          return current;
+        }
+
+  else {return solve(listNodes(current)[0]) ||
+               solve(listNodes(current)[1]) ||
+               solve(listNodes(current)[2]) ||
+               solve(listNodes(current)[3]) ||
+               solve(listNodes(current)[4]) ||
+               solve(listNodes(current)[5]) ||
+               solve(listNodes(current)[6]) ||     
+               solve(listNodes(current)[7]) ||         
+               solve(listNodes(current)[8]) ||
+               solve(listNodes(current)[9])                 
+              }
    /**
    * Принимает игровое поле в том формате, в котором его вернули из функции read.
    * Возвращает игровое поле после попытки его решить.
@@ -216,32 +232,7 @@ function prettyBoard(mass) {
    * Выводит в консоль/терминал судоку.
    * Подумай, как симпатичнее его вывести.
    */
-  // const renderBoard = solve();
-  // const renderBoard = [
-  //   ["1", "-", "5", "8", "-", "2", "-", "-", "-"],
-  //   ["-", "9", "-", "-", "7", "6", "4", "-", "5"],
-  //   ["2", "-", "-", "4", "-", "-", "8", "1", "9"],
-  //   ["-", "1", "9", "-", "-", "7", "3", "-", "6"],
-  //   ["7", "6", "2", "-", "8", "3", "-", "9", "-"],
-  //   ["-", "-", "-", "-", "6", "1", "-", "5", "-"],
-  //   ["-", "-", "7", "6", "-", "-", "-", "3", "-"],
-  //   ["4", "3", "-", "-", "2", "-", "5", "-", "1"],
-  //   ["6", "-", "-", "3", "-", "8", "9", "-", "-"],
-  // ];
-
-  // const renderBoard = [
-  //   [1, undefined, 5, 8, undefined, 2, undefined, undefined, undefined],
-  //   [undefined, 9, undefined, undefined, 7, 6, 4, undefined, 5],
-  //   [2, undefined, undefined, 4, undefined, undefined, 8, 1, 9],
-  //   [undefined, 1, 9, undefined, undefined, 7, 3, undefined, 6],
-  //   [7, 6, 2, undefined, 8, 3, undefined, 9, undefined],
-  //   [undefined, undefined, undefined, undefined, 6, 1, undefined, 5, undefined],
-  //   [undefined, undefined, 7, 6, undefined, undefined, undefined, 3, undefined],
-  //   [4, 3, undefined, undefined, 2, undefined, 5, undefined, 1],
-  //   [6, undefined, undefined, 3, undefined, 8, 9, undefined, undefined],
-  // ];
-
-  for (let i = 0; i < mass.length - 1; i++) {
+  for (let i = 0; i < mass.length; i++) {
     console.log(mass[i].join(" "));
   }
 }
@@ -254,5 +245,6 @@ module.exports = {
   squareCheck,
   finalPossibleVals,
   solve,
+  listNodes,
   prettyBoard
 }
