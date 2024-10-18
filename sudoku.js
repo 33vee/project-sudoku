@@ -1,15 +1,25 @@
-function read() {
+const {EOL} = require("os")
   const fs = require('fs');
-  return JSON.stringify(fs.readFileSync('./puzzles.txt', 'utf-8'))
+   const data = fs.readFileSync('./puzzles.txt', 'utf8')
+   const newData = data.split(EOL)
+function read() {
+   return newData[0].split("")
 }
-console.log(read())
+
 
 function solve() {
+  const sudokuBoard = [];
+  let oldData = read(newData)
+  for(let i = 0; i < oldData.length; i++) {
+    
+  }
+  return oldData
   /**
    * Принимает игровое поле в том формате, в котором его вернули из функции read.
    * Возвращает игровое поле после попытки его решить.
    */
 }
+console.log(solve())
 
 function isSolved() {
   /**
