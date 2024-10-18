@@ -1,8 +1,8 @@
 function read() {
-  /**
-   * Прочесть файл puzzles.txt в кодировке 'utf-8' и вернуть эти данные из функции
-   */
+  const fs = require('fs');
+  return JSON.stringify(fs.readFileSync('./puzzles.txt', 'utf-8'))
 }
+console.log(read())
 
 function solve() {
   /**
@@ -25,3 +25,11 @@ function prettyBoard() {
    * Подумай, как симпатичнее его вывести.
    */
 }
+
+module.exports = {
+  read,
+  solve,
+  isSolved,
+  prettyBoard
+}
+
