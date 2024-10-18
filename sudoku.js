@@ -4,6 +4,8 @@ function read() {
 }
 console.log(read())
 
+
+
 function solve() {
   /**
    * Принимает игровое поле в том формате, в котором его вернули из функции read.
@@ -11,7 +13,7 @@ function solve() {
    */
 }
 
-function isSolved(solve) {
+function isSolved(solve) {}
   /**
    * Принимает игровое поле в том формате, в котором его вернули из функции solve.
    * Возвращает булевое значение — решено это игровое поле или нет.
@@ -20,17 +22,19 @@ function isSolved(solve) {
 
 for(let i = 0; i < array.length;i++){
   for(let j = 0; array[i].length;j++){
+    if(array[i][j] === array[i][j].Set()){
+      return true
+    }else{
+      return false
+    }
+  }
 
-  }
-  if(array[i][j] === array[i][j].Set()){
-    return true
-  }else{
-    return false
-  }
 }
 for(let i = 0; i < array.length;i++){
   for(let k = 0; k < array[0].length;k++){
-    for(let w = 0; w <)
+    for(let w = 0; w < array.length; w++){
+      if(array[i].join("") === array[i].join("").Set()){
+    }
   }
 }
 }
