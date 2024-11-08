@@ -7,33 +7,31 @@ function read() {
 
 function arraySudoku(arr) {
   const sudokuArray = [];
-  const rows = arr.split('\n'); 
+  const rows = arr.split('\n');
 
-  for (let row of rows) { 
-    if (row.trim() === '') continue; 
-    let puzzle = []; 
-    for (let i = 0; i < 9; i++) { 
-      puzzle.push(row.substr(i * 9, 9).split('')); 
+  for (const row of rows) {
+    if (row.trim() === '') continue;
+    const puzzle = [];
+    for (let i = 0; i < 9; i++) {
+      puzzle.push(row.substr(i * 9, 9).split(''));
     }
-    sudokuArray.push(puzzle); 
+    sudokuArray.push(puzzle);
   }
-  return sudokuArray[0]; 
+  return sudokuArray;
 }
-
-
 
 function sudoku(arr, row, col, num) {
   for (let j = 0; j < 9; j++) {
-    if (arr[row][j]=== num) {
-      return false; 
+    if (arr[row][j] === num) {
+      return false;
     }
   }
   for (let i = 0; i < 9; i++) {
     if (arr[i][col] === num) {
-      return false; 
+      return false;
     }
   }
-  return true; 
+  return true;
 }
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -41,7 +39,7 @@ function solveSudoku(arr) {
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       if (arr[i][j] === '-') {
-        for (let num of numbers) {
+        for (const num of numbers) {
           if (sudoku(arr, i, j, num)) {
             arr[i][j] = num;
             if (solveSudoku(arr)) {
@@ -57,9 +55,8 @@ function solveSudoku(arr) {
   return true;
 }
 
-
-const fileContent = read(); 
-const sudokuBoard = arraySudoku(fileContent); 
+const fileContent = read();
+const sudokuBoard = arraySudoku(fileContent);
 console.log(sudokuBoard);
 
 if (solveSudoku(sudokuBoard)) {
