@@ -18,10 +18,26 @@ function isSolved() {
    */
 }
 
-function prettyBoard() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Выводит в консоль/терминал судоку.
-   * Подумай, как симпатичнее его вывести.
-   */
+function prettyBoard(result) {
+  const tableResult = result.join('').split(',').join('');
+  let biutifulTable = '';
+  const line = '+—+———+———+———+—+———+———+———+—+———+———+———+—+';
+  for (let i = 0; i < tableResult.length; i++) {
+    if (i % (tableResult.length / 9) === 0) {
+      if (i % 9 === 0 && i > 0) {
+        biutifulTable += ` |`;
+      }
+      if (i % (tableResult.length / 3) === 0) {
+        biutifulTable += `\n${line}`;
+      }
+      biutifulTable += `\n${line}`;
+      biutifulTable += `\n|`;
+    }
+    if (i % 3 === 0) {
+      biutifulTable += ` |`;
+    }
+    biutifulTable += ` ${tableResult[i]} |`;
+  }
+  biutifulTable += `\n${line}\n${line}`;
+  return biutifulTable;
 }
