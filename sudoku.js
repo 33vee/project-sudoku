@@ -4,12 +4,39 @@ function read() {
    */
 }
 
-function solve() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции read.
-   * Возвращает игровое поле после попытки его решить.
-   */
-}
+const array = read()
+
+function solve(array) {
+    
+  let empty = findEmpty(array);
+  let row = empty[0];
+  let col = empty[1];
+
+  if (row === -1) {
+      return array
+  }
+
+  for (let num = 1; num <= 9; num++) {
+      if (isSolved(array, row, col, num.toString())) {
+          // console.log(isSolved(array, row, col, num.toString()))
+          array[row][col] = num.toString()
+          
+          if (array[row].includes(num.toString())) {
+              isSolved(array, row, col, (num + 1).toString())
+          }
+          solve(array)
+      }
+      
+  }
+
+  if (findEmpty(array)[0] !== -1) {
+
+      array[row][col] = '-'
+
+  }
+  return array
+  }
+
 
 function isSolved() {
   /**
