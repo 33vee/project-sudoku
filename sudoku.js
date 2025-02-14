@@ -19,6 +19,15 @@ console.log(read(2));
 
 const array = read()
 
+function findEmpty(arr) {
+  for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+          if (arr[i][j] === '-') return [i, j]
+      }
+  }
+  return [-1, -1]
+}
+
 function solve(array) {
     
   let empty = findEmpty(array);
@@ -52,14 +61,7 @@ function solve(array) {
 
 
 
-function findEmpty(arr) {
-  for (let i = 0; i < 9; i++) {
-      for (let j = 0; j < 9; j++) {
-          if (arr[i][j] === '-') return [i, j]
-      }
-  }
-  return [-1, -1]
-}
+
 
 function isSolved(array, line, column, value) {
     for (let i = 0; i < array[line].length; i++) {
