@@ -35,15 +35,26 @@ const result = read(-1);
 
 function prettyBoard(result) {
   const tableResult = result.join('').split(',').join('');
-  let newStr = '';
+  let biutifulTable = '';
+  const line = '+—+———+———+———+—+———+———+———+—+———+———+———+—+';
   for (let i = 0; i < tableResult.length; i++) {
-    if (i % 9 === 0) {
-      newStr += `\n ||`;
+    if (i % (tableResult.length / 9) === 0) {
+      if (i % 9 === 0 && i > 0) {
+        biutifulTable += ` |`;
+      }
+      if (i % (tableResult.length / 3) === 0) {
+        biutifulTable += `\n${line}`;
+      }
+      biutifulTable += `\n${line}`;
+      biutifulTable += `\n|`;
     }
-    newStr += `${tableResult[i]}|`;
+    if (i % 3 === 0) {
+      biutifulTable += ` |`;
+    }
+    biutifulTable += ` ${tableResult[i]} |`;
   }
-  return newStr;
+  biutifulTable += `\n${line}\n${line}`;
+  return biutifulTable;
 }
 
 console.log(prettyBoard(result));
-
