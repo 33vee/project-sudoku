@@ -1,4 +1,3 @@
-const { log, table } = require('console');
 const fs = require('fs');
 const { EOL } = require('os');
 
@@ -15,23 +14,79 @@ function read(variant) {
   }
   return puzzles[variant + 1];
 }
+console.log(read(2));
 
-function solve() {
-  //
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции read.
-   * Возвращает игровое поле после попытки его решить.
-   */
+
+const array = read()
+
+function solve(array) {
+    
+  let empty = findEmpty(array);
+  let row = empty[0];
+  let col = empty[1];
+
+  if (row === -1) {
+      return array
+  }
+
+  for (let num = 1; num <= 9; num++) {
+      if (isSolved(array, row, col, num.toString())) {
+          // console.log(isSolved(array, row, col, num.toString()))
+          array[row][col] = num.toString()
+          
+          if (array[row].includes(num.toString())) {
+              isSolved(array, row, col, (num + 1).toString())
+          }
+          solve(array)
+      }
+      
+  }
+
+  if (findEmpty(array)[0] !== -1) {
+
+      array[row][col] = '-'
+
+  }
+  return array
+  }
+
+
+
+function findEmpty(arr) {
+  for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+          if (arr[i][j] === '-') return [i, j]
+      }
+  }
+  return [-1, -1]
 }
 
-function isSolved() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Возвращает булевое значение — решено это игровое поле или нет.
-   */
-}
+function isSolved(array, line, column, value) {
+    for (let i = 0; i < array[line].length; i++) {
+        if (array[line][i] === value) {
+            return false;
+        }
+    }
 
-const result = read(-1);
+    for (let i = 0; i < array.length; i++) {
+        if (array[i][column] === value) {
+            return false;
+        }
+    }
+    
+    const lineSquere = Math.floor(line / 3) * 3
+    const columnSquere = Math.floor(column / 3) * 3
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (array[lineSquere + i][columnSquere + j] === value) {
+                return false
+            }
+        }
+    }
+
+    return true
+
+}
 
 function prettyBoard(result) {
   const tableResult = result.join('').split(',').join('');
@@ -56,5 +111,3 @@ function prettyBoard(result) {
   biutifulTable += `\n${line}\n${line}`;
   return biutifulTable;
 }
-
-console.log(prettyBoard(result));
