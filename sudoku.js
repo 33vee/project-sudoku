@@ -27,11 +27,31 @@ function solve() {
    */
 }
 
-function isSolved() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Возвращает булевое значение — решено это игровое поле или нет.
-   */
+function isSolved(array, line, column, value) {
+    for (let i = 0; i < array[line].length; i++) {
+        if (array[line][i] === value) {
+            return false;
+        }
+    }
+
+    for (let i = 0; i < array.length; i++) {
+        if (array[i][column] === value) {
+            return false;
+        }
+    }
+    
+    const lineSquere = Math.floor(line / 3) * 3
+    const columnSquere = Math.floor(column / 3) * 3
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (array[lineSquere + i][columnSquere + j] === value) {
+                return false
+            }
+        }
+    }
+
+    return true
+
 }
 
 function prettyBoard() {
