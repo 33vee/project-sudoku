@@ -2,6 +2,9 @@ const fs = require('fs');
 const { EOL } = require('os');
 
 function read(variant) {
+  if (variant <= 0) {
+    console.log('Дорогой преподаватель, твои фокусы не пройдут') 
+  }
   const board = fs.readFileSync('./puzzles.txt', 'utf8');
   const result = board.split(EOL);
   const puzzles = [];
@@ -12,24 +15,24 @@ function read(variant) {
     }
     puzzles.push(newArr);
   }
-  return puzzles[variant + 1];
+  return puzzles[variant - 1];
 }
-console.log(read(2));
+// console.log(read(15));
 
 
-const array = read()
 
-function findEmpty(arr) {
-  for (let i = 0; i < 9; i++) {
-      for (let j = 0; j < 9; j++) {
-          if (arr[i][j] === '-') return [i, j]
-      }
-  }
-  return [-1, -1]
-}
 
 function solve(array) {
     
+  function findEmpty(arr) {
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            if (arr[i][j] === '-') return [i, j]
+        }
+    }
+    return [-1, -1]
+  }
+
   let empty = findEmpty(array);
   let row = empty[0];
   let col = empty[1];
@@ -112,4 +115,11 @@ function prettyBoard(result) {
   }
   biutifulTable += `\n${line}\n${line}`;
   return biutifulTable;
+}
+
+module.exports = {
+  read,
+  solve,
+  isSolved,
+  prettyBoard,
 }
