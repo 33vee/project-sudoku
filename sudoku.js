@@ -1,8 +1,21 @@
-function read() {
-  /**
-   * Прочесть файл puzzles.txt в кодировке 'utf-8' и вернуть эти данные из функции
-   */
+const fs = require('fs');
+const { EOL } = require('os');
+
+function read(variant) {
+  const board = fs.readFileSync('./puzzles.txt', 'utf8');
+  const result = board.split(EOL);
+  const puzzles = [];
+  for (const item of result) {
+    const newArr = [];
+    for (let i = 0; i < 9; i++) {
+      newArr.push(item.slice(i * 9, (i + 1) * 9).split(''));
+    }
+    puzzles.push(newArr);
+  }
+  return puzzles[variant + 1];
 }
+console.log(read(2));
+
 
 const array = read()
 
@@ -38,11 +51,41 @@ function solve(array) {
   }
 
 
-function isSolved() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Возвращает булевое значение — решено это игровое поле или нет.
-   */
+
+function findEmpty(arr) {
+  for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+          if (arr[i][j] === '-') return [i, j]
+      }
+  }
+  return [-1, -1]
+}
+
+function isSolved(array, line, column, value) {
+    for (let i = 0; i < array[line].length; i++) {
+        if (array[line][i] === value) {
+            return false;
+        }
+    }
+
+    for (let i = 0; i < array.length; i++) {
+        if (array[i][column] === value) {
+            return false;
+        }
+    }
+    
+    const lineSquere = Math.floor(line / 3) * 3
+    const columnSquere = Math.floor(column / 3) * 3
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (array[lineSquere + i][columnSquere + j] === value) {
+                return false
+            }
+        }
+    }
+
+    return true
+
 }
 
 function prettyBoard() {
