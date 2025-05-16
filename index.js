@@ -1,9 +1,7 @@
 // принимаю Массив массивов от Димы и мне нужно сделать из этого измененный массив массивов со вставкой туда чисел новых
 function solve(arr) {
-  for (let i = 0; i < arr.length - 1; i++) {
-    const newArr = arr[i].map((number) => (number === '-' ? (number = '0') : number = '1'));
-    return newArr
-  }
+    const newArr = arr.map((number) => number.map((num) => num === '-' ? num = '0': num))
+    return newArr.join('\n').split('\n');
 }
 
 console.log(
