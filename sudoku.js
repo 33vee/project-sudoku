@@ -24,7 +24,7 @@ function solve() {
 }
 
 function isSolved() {
-    return board.every((row) => row.every((num) => num !== 0));
+    return board.every((row) => row.every((num) => num !== 0)); // rjvvtynfhbq
 }
 
 function prettyBoard() {
