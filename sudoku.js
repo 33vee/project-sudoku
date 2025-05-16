@@ -37,7 +37,7 @@ function isValidMove(board, row, col, num) {
   return true;
 }
 
-function solve() {
+function solve(board) {
   function helper() {
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
@@ -64,7 +64,7 @@ function solve() {
 }
 
 function isSolved(board) {
-  return board.every((row) => row.every((num) => num !== 0)); 
+  return board.every((row) => row.every((num) => num !== 0));
 }
 
 function prettyBoard(board) {
@@ -75,7 +75,7 @@ function prettyBoard(board) {
 
     for (let j = 0; j < 9; j++) {
       if (j % 3 === 0) output += '| ';
-      output += board[i][j] === 0 ? '. ' : board[i][j] + ' ';
+      output += board[i][j] === 0 ? '. ' : `${board[i][j]} `;
     }
 
     output += '|\n';
