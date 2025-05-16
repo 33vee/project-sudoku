@@ -63,16 +63,26 @@ function solve() {
   return board;
 }
 
-function isSolved() {
-  return board.every((row) => row.every((num) => num !== 0)); // rjvvtynfhbq
+function isSolved(board) {
+  return board.every((row) => row.every((num) => num !== 0)); 
 }
 
-function prettyBoard() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Выводит в консоль/терминал судоку.
-   * Подумай, как симпатичнее его вывести.
-   */
+function prettyBoard(board) {
+  let output = '\n';
+
+  for (let i = 0; i < 9; i++) {
+    if (i % 3 === 0) output += '+-------+-------+-------+\n';
+
+    for (let j = 0; j < 9; j++) {
+      if (j % 3 === 0) output += '| ';
+      output += board[i][j] === 0 ? '. ' : board[i][j] + ' ';
+    }
+
+    output += '|\n';
+  }
+
+  output += '+-------+-------+-------+\n';
+  return output;
 }
 
 module.exports = { read, solve, isSolved, prettyBoard };
