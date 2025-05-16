@@ -1,4 +1,6 @@
 const { read, solve, isSolved, prettyBoard } = require('./sudoku');
+
+
 function run(num) {
   try {
     const board = read(num);
@@ -19,4 +21,6 @@ function run(num) {
   }
 }
 
-run(Math.floor(Math.random() * 15) + 1);
+const sudokuNum = run(process.argv[2] ? process.argv[2] : Math.floor(Math.random() * 15) + 1);
+run(sudokuNum)
+// run(Math.floor(Math.random() * 15) + 1);
