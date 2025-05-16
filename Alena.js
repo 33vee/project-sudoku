@@ -1,20 +1,22 @@
-const board = [
-  [1, 0, 5, 8, 0, 2, 0, 0, 0],
-  [0, 9, 0, 0, 7, 6, 4, 0, 5],
-  [2, 0, 0, 4, 0, 0, 8, 1, 9],
-  [0, 1, 9, 0, 0, 7, 3, 0, 6],
-  [7, 6, 2, 0, 8, 3, 0, 9, 0],
-  [0, 0, 0, 0, 6, 1, 0, 5, 0],
-  [0, 0, 7, 6, 0, 0, 0, 3, 0],
-  [4, 3, 0, 0, 2, 0, 5, 0, 1],
-  [6, 0, 0, 3, 0, 8, 9, 0, 0]
-];
-
 function prettyBoard(board) {
   if (typeof board !== 'object' || board.length !== 81) {
     // если не является строкой или длина переданного аргумента не равна 81 (9 по 9)
     console.log('Неправильный формат доски'); //  Выводим ошибку в консоль
     // Прекращаем выполнение функции
   }
- const result = board.join('').split('').join('')
+  // const result = board.join('').split(',').join('');
+  // console.log(result);
+
+  //  вывод всех строк
+  for (let row = 0; row < 9; row++) {
+    // получаем текущую строку
+    const rowString = board.flat().slice(row * 9, row * 9 + 9); // board.slice[start, end] start = row * 9  , end = row * 9 + 9
+    console.log(rowString)
+    // заменяем '-' и добавляем пробелы
+    const formatRow = rowString.join('').replace(/-/gmi, '·').split('') // разбиваю строку на массив символов
+      .join(' '); // соединяю массив в строку с проьбелами
+
+    console.log(formatRow); //  выводим каждую строку
+  }
 }
+prettyBoard();
