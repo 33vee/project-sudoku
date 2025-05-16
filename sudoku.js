@@ -38,14 +38,33 @@ function isValidMove(board, row, col, num) {
 }
 
 function solve() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции read.
-   * Возвращает игровое поле после попытки его решить.
-   */
+  function helper() {
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
+        if (board[row][col] === 0) {
+          for (let num = 1; num <= 9; num++) {
+            if (isValidMove(board, row, col, num)) {
+              board[row][col] = num;
+              if (helper()) {
+                return true;
+              }
+
+              board[row][col] = 0;
+            }
+          }
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  helper();
+  return board;
 }
 
 function isSolved() {
-    return board.every((row) => row.every((num) => num !== 0)); // rjvvtynfhbq
+  return board.every((row) => row.every((num) => num !== 0)); // rjvvtynfhbq
 }
 
 function prettyBoard() {
@@ -56,5 +75,4 @@ function prettyBoard() {
    */
 }
 
-
-module.exports = {read, solve, isSolved, prettyBoard}
+module.exports = { read, solve, isSolved, prettyBoard };
