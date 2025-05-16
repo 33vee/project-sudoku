@@ -1,3 +1,1 @@
-// Используйте для решения судоку необходимые функции из файла sudoku.js
-
-// удали меня, я для создания ветки
+const {read, solve, isSolved, prettyBoard} = require('./sudoku')
