@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sudoku Solver</title>
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+  <h1>Sudoku Solver</h1>
+
+  <p class="puzzle-number">Номер судоку (0–14):</p>
+  <input id="puzzle-number" placeholder="0"/>
+  <button onclick="solveSudoku()">Решить судоку</button>
+
+  <div class="myTable">
+    <div id="output" style="display: none">
+      <h2>Исходное поле:</h2>
+      <div id="initial-board"></div>
+    </div>
+  
+    <div id="solution-block" style="display: none">
+      <h2>Решение:</h2>
+      <div id="solved-board"></div>      
+    </div>
+  </div>
+  <p id="result-text"></p>
+
+  
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
