@@ -4,11 +4,15 @@ function read() {
    */
 }
 
-function solve() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции read.
-   * Возвращает игровое поле после попытки его решить.
-   */
+function findEmpty(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[0].length; j++) {
+      if (arr[i][j] === '-') {
+        return [i, j];
+      }
+    }
+  }
+  return null;
 }
 
 const arr = [
@@ -60,4 +64,5 @@ function prettyBoard(solve) {
   console.log(newStr.slice(185, 208).trim());
 }
 
+function solve() {}
 prettyBoard(arr);
