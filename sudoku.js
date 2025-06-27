@@ -1,20 +1,25 @@
+
 const fs = require('fs')
+
 
 function read() {
   const word = fs.readFileSync(__dirname + '/puzzles.txt', 'utf-8');
   const newWord = word.match(/^[\s\S]{81}/).join('');
   const sudokuArr = [];
+
   for (let i = 0; i < 81; i += 9) {
     const line = [];
     line.push(newWord.substring(i, i + 9));
     sudokuArr.push(line);
   }
+
   const sudokuArrSplited = sudokuArr.map(el => el[0].split(''));
   return sudokuArrSplited
 }
 
-const sudoku = read()
-console.log(sudoku);
+
+function solve(sudoku) {}
+
 
 function solve() {
   
@@ -39,4 +44,6 @@ function prettyBoard() {
    */
 }
 
+
 module.exports = {read}
+
