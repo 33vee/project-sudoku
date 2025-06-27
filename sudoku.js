@@ -25,12 +25,42 @@ function read(num1, num2) {
 
 console.log(read(81, 9));
 
-function solve(num) {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции read.
-   * Возвращает игровое поле после попытки его решить.
-   */
+const sudoku = [read()[num - 1]];
+//solve
+function solve() {
+  const board = 9;
+  function find() {
+    for (let x = 0; x < board; x++) {
+      for (let y = 0; y < board; y++) {
+        if (sudoku[x][y] === '-') {
+          return [x, y];
+        }
+      }
+    }
+    return null;
+  }
+  const pos = find();
+  function check(pos, sudoku, num) {
+    const [x,y] = pos;
+    for (let i = 0; i < board; i++) {
+      if (sudoku[x][i] === num && i !== y) {
+        return false;
+      }
+    }
+    for (let i = 0; i < board; i++) {
+      if (sudoku[i][y] === num && i !== x) {
+        return false;
+      }
+    }
+  }if (pos === null) {
+      return board;
+    }
+    const [row, col] = position;
+    for (let i = 1; i <= 9; i++) {
+      const num = i.toString();
+    }
 }
+
 
 function isSolved() {
   /**
