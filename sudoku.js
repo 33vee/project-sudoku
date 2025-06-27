@@ -1,4 +1,6 @@
-const fs = require('fs');
+
+const fs = require('fs')
+
 
 function read() {
   const word = fs.readFileSync(__dirname + '/puzzles.txt', 'utf-8');
@@ -16,9 +18,11 @@ function read() {
 }
 
 
+function solve(sudoku) {}
 
 
-function solve(sudoku) {
+function solve() {
+  
   /**
    * Принимает игровое поле в том формате, в котором его вернули из функции read.
    * Возвращает игровое поле после попытки его решить.
@@ -40,4 +44,6 @@ function prettyBoard() {
    */
 }
 
+
 module.exports = {read}
+
