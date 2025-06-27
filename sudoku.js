@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 const file = fs.readFileSync('./puzzles.txt', 'utf8');
 
@@ -15,15 +14,12 @@ function arrays(array, num) {
 }
 const allBoards = arrays(array, 81);
 
-
 function read(allBoards, num) {
   const board = allBoards[num - 1];
   return arrays(board, 9);
 }
 
-const board = read(allBoards, 1);
-console.log(board);
-
+// Проверяем валидность
 function valid(board, row, col, num) {
   for (let i = 0; i < 9; i++) {
     if (board[i][col] == num) {
@@ -45,18 +41,11 @@ function valid(board, row, col, num) {
     }
   }
   return true;
-
-function read() {
-  /**
-   * Прочесть файл puzzles.txt в кодировке 'utf08' и вернуть эти данные из функции
-   */
-
 }
-console.log(valid(board, 2, 2, 6));
-
+// Находим пустое
 function findEmpty(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[0].length; j++) {
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
       if (arr[i][j] === '-') {
         return [i, j];
       }
@@ -65,17 +54,30 @@ function findEmpty(arr) {
   return null;
 }
 
-const arr = [
-  [1, 0, 5, 8, 0, 2, 0, 0, 0],
-  [0, 9, 0, 0, 7, 6, 4, 0, 5],
-  [2, 0, 0, 4, 0, 0, 8, 1, 9],
-  [0, 1, 9, 0, 0, 7, 3, 0, 6],
-  [7, 6, 2, 0, 8, 3, 0, 9, 0],
-  [0, 0, 0, 0, 6, 1, 0, 5, 0],
-  [0, 0, 7, 6, 0, 0, 0, 3, 0],
-  [4, 3, 0, 0, 2, 0, 5, 0, 0],
-  [6, 0, 0, 3, 0, 8, 9, 0, 0],
-];
+// Рекурсия
+function solve(board) {
+  const empVal = findEmpty(board);
+  if (!empVal) {
+    return true;
+  }
+
+  const [row, col] = empVal;
+
+  for (let num = 1; num <= 9; num++) {
+    if (valid(board, row, col, num)) {
+      board[row][col] = num;
+
+      if (solve(board)) {
+        return board;
+      }
+      board[row][col] = '-';
+    }
+  }
+  return false;
+}
+
+const result = solve(read(allBoards, 15));
+// Вывод решения
 function prettyBoard(solve) {
   const flatArr = solve.flat();
   for (let i = 2; i < flatArr.length; i += 3) {
@@ -95,7 +97,7 @@ function prettyBoard(solve) {
   for (let i = 8; i < flatArr.length; i += 9) {
     flatArr[i] += '\n';
   }
-  let str = ' ';
+  const str = ' ';
   const newNewArr = flatArr
     .map((el) => `${el} `)
     .join('')
@@ -114,5 +116,4 @@ function prettyBoard(solve) {
   console.log(newStr.slice(185, 208).trim());
 }
 
-function solve() {}
-prettyBoard(arr);
+prettyBoard(result);
