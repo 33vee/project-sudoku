@@ -1,10 +1,24 @@
+const fs = require('fs');
+
 function read() {
-  /**
-   * Прочесть файл puzzles.txt в кодировке 'utf-8' и вернуть эти данные из функции
-   */
+  const word = fs.readFileSync(__dirname + '/puzzles.txt', 'utf-8');
+  const newWord = word.match(/^[\s\S]{81}/).join('');
+  const sudokuArr = [];
+
+  for (let i = 0; i < 81; i += 9) {
+    const line = [];
+    line.push(newWord.substring(i, i + 9));
+    sudokuArr.push(line);
+  }
+
+  const sudokuArrSplited = sudokuArr.map(el => el[0].split(''));
+  return sudokuArrSplited
 }
 
-function solve() {
+
+
+
+function solve(sudoku) {
   /**
    * Принимает игровое поле в том формате, в котором его вернули из функции read.
    * Возвращает игровое поле после попытки его решить.
@@ -25,3 +39,5 @@ function prettyBoard() {
    * Подумай, как симпатичнее его вывести.
    */
 }
+
+module.exports = {read}
