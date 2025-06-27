@@ -1,10 +1,31 @@
-function read() {
+const fs = require('fs');
+
+function read(num1, num2) {
   /**
    * Прочесть файл puzzles.txt в кодировке 'utf-8' и вернуть эти данные из функции
    */
+  const puzzles = fs.readFileSync('./puzzles.txt', 'utf-8');
+
+  let cleanStr = puzzles.replace(/\r?\n|\r/g, '');
+  let newArr = [];
+
+  for (let i = 0; i < cleanStr.length; i += num1) {
+    let chunk = cleanStr.slice(i, i + num1);
+    let innerArr = [];
+
+    for (let j = 0; j < chunk.length; j += num2) {
+      innerArr.push(chunk.slice(j, j + num2).split(''));
+    }
+
+    newArr.push(innerArr);
+  }
+
+  return newArr;
 }
 
-function solve() {
+console.log(read(81, 9));
+
+function solve(num) {
   /**
    * Принимает игровое поле в том формате, в котором его вернули из функции read.
    * Возвращает игровое поле после попытки его решить.
