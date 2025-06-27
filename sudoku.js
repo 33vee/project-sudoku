@@ -25,7 +25,7 @@ function read(num1, num2) {
 
 console.log(read(81, 9));
 
-const sudoku = [read()[num - 1]];
+const sudoku = read()[0];
 //solve
 function solve() {
   const board = 9;
@@ -69,13 +69,23 @@ function isSolved() {
    */
 }
 
-const solvePret = solve ()
+let arr = [
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+];
 
-function prettyBoard(solvePretty) {
-  for (let i = 0; i < solvePretty.length; i++) {
+function prettyBoard(arr) {
+  for (let i = 0; i < arr.length; i++) {
     let line = '';
-    for (let j = 0; j < solvePretty[i].length; j++) {
-      line += `${solvePretty[i][j]} `;
+    for (let j = 0; j < arr[i].length; j++) {
+      line += `${arr[i][j]} `;
       if (j === 2 || j === 5) {
         line += ' | ';
       }
@@ -85,6 +95,6 @@ function prettyBoard(solvePretty) {
       console.log('— — — — — — — — — — — — ');
     }
   }
-  return solvePretty;
+  return arr;
 }
-prettyBoard(solve());
+prettyBoard(arr);
