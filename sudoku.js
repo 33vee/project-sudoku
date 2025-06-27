@@ -39,23 +39,13 @@ function isSolved() {
    */
 }
 
-const arr = [
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9],
-];
+const solvePret = solve ()
 
-function prettyBoard(arr) {
-  for (let i = 0; i < arr.length; i++) {
+function prettyBoard(solvePretty) {
+  for (let i = 0; i < solvePretty.length; i++) {
     let line = '';
-    for (let j = 0; j < arr[i].length; j++) {
-      line += `${arr[i][j]} `;
+    for (let j = 0; j < solvePretty[i].length; j++) {
+      line += `${solvePretty[i][j]} `;
       if (j === 2 || j === 5) {
         line += ' | ';
       }
@@ -65,6 +55,6 @@ function prettyBoard(arr) {
       console.log('— — — — — — — — — — — — ');
     }
   }
-  return arr;
+  return solvePretty;
 }
-prettyBoard(arr);
+prettyBoard(solve());
