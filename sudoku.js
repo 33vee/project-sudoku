@@ -1,22 +1,51 @@
-function read() {
-  /**
-   * Прочесть файл puzzles.txt в кодировке 'utf-8' и вернуть эти данные из функции
-   */
+const fs = require('fs');
+const file = fs.readFileSync('./puzzles.txt', 'utf8');
+
+const array = file.split('');
+
+function arrays(array, num) {
+  const cleanArray = array.map((el) => el.replace(/\n/g, '')).filter((el) => el !== '');
+
+  const result = [];
+  for (let i = 0; i < cleanArray.length; i += num) {
+    result.push(cleanArray.slice(i, i + num));
+  }
+  return result;
+}
+const allBoards = arrays(array, 81);
+
+function read(allBoards, num) {
+  const board = allBoards[num - 1];
+  return arrays(board, 9);
 }
 
-function solve() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции read.
-   * Возвращает игровое поле после попытки его решить.
-   */
-}
+const board = read(allBoards, 1);
+console.log(board);
 
-function isSolved() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Возвращает булевое значение — решено это игровое поле или нет.
-   */
+function valid(board, row, col, num) {
+  for (let i = 0; i < 9; i++) {
+    if (board[i][col] == num) {
+      return false;
+    }
+  }
+  for (let j = 0; j < 9; j++) {
+    if (board[row][j] == num) {
+      return false;
+    }
+  }
+  const startIRow = Math.floor(row / 3) * 3;
+  const startICol = Math.floor(col / 3) * 3;
+  for (let i = startIRow; i <= startIRow + 2; i++) {
+    for (let j = startICol; j <= startICol + 2; j++) {
+      if (board[i][j] == num) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
+console.log(valid(board, 2, 2, 6));
+function solve() {}
 
 function prettyBoard() {
   /**
