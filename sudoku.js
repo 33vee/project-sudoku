@@ -14,6 +14,7 @@ function arrays(array, num) {
 }
 const allBoards = arrays(array, 81);
 
+
 function read(allBoards, num) {
   const board = allBoards[num - 1];
   return arrays(board, 9);
@@ -45,6 +46,18 @@ function valid(board, row, col, num) {
   return true;
 }
 console.log(valid(board, 2, 2, 6));
+
+function findEmpty(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[0].length; j++) {
+      if (arr[i][j] === '-') {
+        return [i, j];
+      }
+    }
+  }
+  return null;
+}
+
 function solve() {}
 
 function prettyBoard() {
