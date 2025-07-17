@@ -3,6 +3,7 @@ function read() {
   const board = fs.readFileSync('./puzzles.txt', 'utf-8');
   return board
 }
+//sdfghjklkjhgfghjk
 
 function solve() {
   /**
