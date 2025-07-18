@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { vert } = require('./funcVert.js');
+const { squr } = require('./square.js');
 
 function read(num) {
   try {
@@ -21,16 +22,20 @@ function read(num) {
 
 function main() {
   for (let i = 1; i < 16; i++) {
-    let arrI = read(i);
-    for (let i = 0; i < 81; i++) {
-      if (isSolved(arrI)) {
-        return prettyBoard(arrI);
-      } else {
-        arrI = solve(arrI);
-      }
-    }
-    console.log('Не могу решить');
+    mainI(i);
   }
+}
+
+function mainI(i) {
+  let arrI = read(i);
+  for (let i = 0; i < 81; i++) {
+    if (isSolved(arrI)) {
+      return prettyBoard(arrI);
+    } else {
+      arrI = solve(arrI);
+    }
+  }
+  console.log('Не могу решить');
 }
 
 function solve(arr) {
@@ -51,16 +56,12 @@ function solve(arr) {
 function sort(arr, i, j) {
   const arrSmall = [...arr[i], ...vert(arr, j), ...squr(arr, i, j)];
   let arrResult = [];
-  for (let i = 1; i < 9; i++) {
+  for (let i = 1; i < 10; i++) {
     if (!arrSmall.find((el) => el == i)) {
       arrResult.push(i);
     }
   }
-  return [1];
-}
-
-function squr(arr, i, j) {
-  return [4, 5, 6];
+  return arrResult;
 }
 
 function isSolved(arr) {
@@ -82,12 +83,13 @@ function isSolved(arr) {
 function prettyBoard(arr) {
   let arrResult = [];
   for (let i = 0; i < 3; i++) {
-    arrResult.push(arr[i], arr[i + 1], arr[i + 2], []);
+    arrResult.push(arr[3 * i], arr[3 * i + 1], arr[3 * i + 2], []);
   }
   for (let i = 0; i < 12; i++) {
     arrResult[i].splice(3, 0, ' ');
     arrResult[i].splice(7, 0, ' ');
   }
+  arrResult.push(['----------------------']);
   return console.log(arrResult.join('\n').replaceAll(',', ' '));
 }
 
