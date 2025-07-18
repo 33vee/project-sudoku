@@ -20,24 +20,26 @@ function read(num) {
   }
 }
 
-function main() {
-  for (let i = 1; i < 16; i++) {
-    console.log(`     Судоку номер ${i}: \n`);
-  
-    mainI(i);
+function main(j) {
+  if (j) {
+    mainI(j);
+  } else {
+    for (let i = 1; i < 16; i++) {
+      mainI(i);
+    }
   }
 }
 
 function mainI(i) {
   let arrI = read(i);
+  console.log(`         Судоку номер ${i}: \n`);
   for (let i = 0; i < 81; i++) {
     if (isSolved(arrI)) {
       return prettyBoard(arrI);
-    } else {
-      arrI = solve(arrI);
     }
+    arrI = solve(arrI);
   }
-  console.log('      Не могу решить \n');
+  console.log('          Не могу решить \n');
 }
 
 function solve(arr) {
@@ -87,17 +89,17 @@ function prettyBoard(arr) {
     let line = '';
 
     for (let j = 0; j < arr[i].length; j++) {
-      line += arr[i][j] + ' ';
+      line += ' ' + arr[i][j] + ' ';
       if (j === 2 || j === 5) {
         line += ' ┃ ';
       }
     }
     console.log(line);
     if (i === 2 || i === 5) {
-      console.log('━━ ━━ ━━ ━━ ━━ ━━ ━━ ━━');
+      console.log(' ━━ ━━ ━━ ━━ ━━ ━━ ━━ ━━ ━━ ━━ ━━');
     }
   }
-  console.log("\n")
+  console.log('\n');
 }
 
 main();
