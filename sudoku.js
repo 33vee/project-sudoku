@@ -22,6 +22,8 @@ function read(num) {
 
 function main() {
   for (let i = 1; i < 16; i++) {
+    console.log(`     Судоку номер ${i}: \n`);
+  
     mainI(i);
   }
 }
@@ -35,7 +37,7 @@ function mainI(i) {
       arrI = solve(arrI);
     }
   }
-  console.log('Не могу решить');
+  console.log('      Не могу решить \n');
 }
 
 function solve(arr) {
@@ -81,16 +83,21 @@ function isSolved(arr) {
 }
 
 function prettyBoard(arr) {
-  let arrResult = [];
-  for (let i = 0; i < 3; i++) {
-    arrResult.push(arr[3 * i], arr[3 * i + 1], arr[3 * i + 2], []);
+  for (let i = 0; i < arr.length; i++) {
+    let line = '';
+
+    for (let j = 0; j < arr[i].length; j++) {
+      line += arr[i][j] + ' ';
+      if (j === 2 || j === 5) {
+        line += ' ┃ ';
+      }
+    }
+    console.log(line);
+    if (i === 2 || i === 5) {
+      console.log('━━ ━━ ━━ ━━ ━━ ━━ ━━ ━━');
+    }
   }
-  for (let i = 0; i < 12; i++) {
-    arrResult[i].splice(3, 0, ' ');
-    arrResult[i].splice(7, 0, ' ');
-  }
-  arrResult.push(['----------------------']);
-  return console.log(arrResult.join('\n').replaceAll(',', ' '));
+  console.log("\n")
 }
 
 main();
