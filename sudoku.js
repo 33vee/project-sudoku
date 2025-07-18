@@ -1,4 +1,6 @@
 const fs = require('fs');
+const { vert } = require('./funcVert.js');
+const { squr } = require('./square.js');
 
 function read(num) {
   try {
@@ -18,25 +20,77 @@ function read(num) {
   }
 }
 
-
-function solve() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции read.
-   * Возвращает игровое поле после попытки его решить.
-   */
+function main() {
+  for (let i = 1; i < 16; i++) {
+    mainI(i);
+  }
 }
 
-function isSolved() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Возвращает булевое значение — решено это игровое поле или нет.
-   */
+function mainI(i) {
+  let arrI = read(i);
+  for (let i = 0; i < 81; i++) {
+    if (isSolved(arrI)) {
+      return prettyBoard(arrI);
+    } else {
+      arrI = solve(arrI);
+    }
+  }
+  console.log('Не могу решить');
 }
 
-function prettyBoard() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Выводит в консоль/терминал судоку.
-   * Подумай, как симпатичнее его вывести.
-   */
+function solve(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      arr[i][j] = Number(arr[i][j]);
+      if (isNaN(arr[i][j])) {
+        const numArr = sort(arr, i, j);
+        if (numArr.length === 1) {
+          arr[i][j] = numArr[0];
+        }
+      }
+    }
+  }
+  return arr;
 }
+
+function sort(arr, i, j) {
+  const arrSmall = [...arr[i], ...vert(arr, j), ...squr(arr, i, j)];
+  let arrResult = [];
+  for (let i = 1; i < 10; i++) {
+    if (!arrSmall.find((el) => el == i)) {
+      arrResult.push(i);
+    }
+  }
+  return arrResult;
+}
+
+function isSolved(arr) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      if (isNaN(Number(arr[i][j]))) {
+        count += 1;
+      }
+    }
+  }
+  if (!count) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function prettyBoard(arr) {
+  let arrResult = [];
+  for (let i = 0; i < 3; i++) {
+    arrResult.push(arr[3 * i], arr[3 * i + 1], arr[3 * i + 2], []);
+  }
+  for (let i = 0; i < 12; i++) {
+    arrResult[i].splice(3, 0, ' ');
+    arrResult[i].splice(7, 0, ' ');
+  }
+  arrResult.push(['----------------------']);
+  return console.log(arrResult.join('\n').replaceAll(',', ' '));
+}
+
+main();

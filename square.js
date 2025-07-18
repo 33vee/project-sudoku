@@ -46,3 +46,5 @@ function squr(arr, i, j) {
   }
   return numbers;
 }
+
+module.exports = {squr};
