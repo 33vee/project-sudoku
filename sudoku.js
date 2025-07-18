@@ -1,3 +1,21 @@
+const fs = require('fs');
+
+function read(num) {
+  try {
+    const file = fs.readFileSync('puzzles.txt', 'utf-8');
+    const arrs = file
+      .trim()
+      .split('\n')
+      .map((el) => el.split(','));
+    const [n] = arrs[num - 1].map((el) => el.split(''));
+    const array = [];
+    for (let i = 0; i < 81; i += 9) {
+      array.push(n.slice(i, i + 9));
+    }
+    return array;
+  } catch (error) {
+    console.error(`${error}\nВведите число от 1 до 15`);
+  }
 const { vert } = require('./funcVert.js');
 
 function read() {
@@ -16,6 +34,7 @@ function read() {
     [6, '-', '-', 3, '-', 8, 9, '-', '-'],
   ];
 }
+
 
 function main() {
   for (let i = 1; i < 2; i++) {
