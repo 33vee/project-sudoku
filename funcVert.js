@@ -5,3 +5,5 @@ function vert(array, j) {
   }
   return newArr;
 }
+
+module.exports = {vert};

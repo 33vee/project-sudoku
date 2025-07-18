@@ -1,13 +1,25 @@
+const { vert } = require('./funcVert.js');
+
 function read() {
   /**
    * Прочесть файл puzzles.txt в кодировке 'utf-8' и вернуть эти данные из функции
    */
+  return [
+    [1, '-', 5, 8, '-', 2, '-', '-', '-'],
+    ['-', 9, '-', '-', 7, 6, 4, '-', 5],
+    [2, '-', '-', 4, '-', '-', 8, 1, 9],
+    ['-', 1, 9, '-', '-', 7, 3, '-', 6],
+    [7, 6, 2, '-', 8, 3, '-', 9, '-'],
+    ['-', '-', '-', '-', 6, 1, '-', 5, '-'],
+    ['-', '-', 7, 6, '-', '-', '-', 3, '-'],
+    [4, 3, '-', '-', 2, '-', 5, '-', 1],
+    [6, '-', '-', 3, '-', 8, 9, '-', '-'],
+  ];
 }
 
 function main() {
   for (let i = 1; i < 2; i++) {
     let arrI = read(i);
-    console.log(arrI);
     for (let i = 0; i < 81; i++) {
       if (isSolved(arrI)) {
         return prettyBoard(arrI);
@@ -43,18 +55,24 @@ function sort(arr, i, j) {
   return arrResult;
 }
 
-function vert(arr,j) {
-  return [1,2,3]
-}
-function squr (arr,i,j){ 
-  return [4,5,6]
+function squr(arr, i, j) {
+  return [4, 5, 6];
 }
 
-function isSolved() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Возвращает булевое значение — решено это игровое поле или нет.
-   */
+function isSolved(arr) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      if (typeof arr[i][j] !== 'number') {
+        count += 1;
+      }
+    }
+  }
+  if (!count) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function prettyBoard() {
