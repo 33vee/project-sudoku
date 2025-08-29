@@ -1,3 +1,24 @@
+
+const fs = require('fs');
+const {EOL} = require ('os')
+
+function read() {
+
+  return fs.readFileSync('./puzzles.txt', 'utf-8').trim().split('EOL')
+
+
+}
+
+console.log(read());
+
+
+function solve() {
+  /**
+   * Принимает игровое поле в том формате, в котором его вернули из функции read.
+   * Возвращает игровое поле после попытки его решить.
+   */
+}
+
 const sudoArr = [
   '1-58-2---',
   '-9--764-5',
@@ -16,6 +37,7 @@ function solve(arr) {
     for (let i = 0; i < 9; i++) {
       if (board[row][i] === num) return false;
     }
+
 
     for (let i = 0; i < 9; i++) {
       if (board[i][col] === num) return false;
