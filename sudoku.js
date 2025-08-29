@@ -1,3 +1,6 @@
+const randomizer = require('./randomizer')
+
+
 function read() {
   /**
    * Прочесть файл puzzles.txt в кодировке 'utf-8' и вернуть эти данные из функции
@@ -12,11 +15,13 @@ function solve(read, random) {
 
 }
 
-function isSolved() {
+function isSolved(resultSolve) {
   /**
    * Принимает игровое поле в том формате, в котором его вернули из функции solve.
    * Возвращает булевое значение — решено это игровое поле или нет.
    */
+  if (solveArr)
+
 }
 
 function prettyBoard() {
