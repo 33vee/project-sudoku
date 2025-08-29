@@ -36,6 +36,7 @@ function solve() {
         }
         if (!isSolved()) {
           
+          
         }
       }
     }
