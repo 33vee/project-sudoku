@@ -24,7 +24,7 @@ function solve(arr) {
 
     const startRow = Math.floor(row / 3) * 3;
     const startCol = Math.floor(col / 3) * 3;
-    
+
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         if (board[startRow + i][startCol + j] === num) return false;
@@ -58,3 +58,25 @@ function solve(arr) {
 }
 
 console.log(solve(sudoArr));
+
+function read() {
+  /**
+   * Прочесть файл puzzles.txt в кодировке 'utf-8' и вернуть эти данные из функции
+   */
+}
+
+/**
+ * Принимает игровое поле в том формате, в котором его вернули из функции solve.
+ * Возвращает булевое значение — решено это игровое поле или нет.
+ */
+
+isSolved();
+
+function prettyBoard() {
+  /**
+   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
+   * Выводит в консоль/терминал судоку.
+   * Подумай, как симпатичнее его вывести.
+   */
+}
+console.log(board);
