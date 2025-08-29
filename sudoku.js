@@ -61,7 +61,9 @@ function isSolved(resultSolve) {
   //   }
 }
 
-function prettyBoard() {
+function prettyBoard(
+  
+) {
   /**
    * Принимает игровое поле в том формате, в котором его вернули из функции solve.
    * Выводит в консоль/терминал судоку.
