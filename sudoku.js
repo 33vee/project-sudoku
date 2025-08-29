@@ -1,9 +1,3 @@
-function read() {
-  /**
-   * Прочесть файл puzzles.txt в кодировке 'utf-8' и вернуть эти данные из функции
-   */
-}
-
 const sudoArr = [
   '1-58-2---',
   '-9--764-5',
@@ -16,57 +10,51 @@ const sudoArr = [
   '6--3-89--',
 ];
 
-const board = sudoArr.map((row) => row.split(''));
-console.log(board);
+function solve(arr) {
+  const board = arr.map((row) => row.split(''));
 
-/**
- * Принимает игровое поле в том формате, в котором его вернули из функции read.
- * Возвращает игровое поле после попытки его решить.
- */
-function solve() {
-  for (let row = 0; row < read.length; row++) {
-    for (let column = 0; column < read[row].length; column++) {
-      if (read[column][column] === '-') {
-        for (let num = 1; num < 9; num++) {
-          resultSolve.push(read[column][column]);
-          const numStr = num.toString();
-          if (isSolved(row, column, numStr)) {
-            resultSolve.push(numStr);
+  function isValid(row, col, num) {
+    for (let i = 0; i < 9; i++) {
+      if (board[row][i] === num) return false;
+    }
+
+    for (let i = 0; i < 9; i++) {
+      if (board[i][col] === num) return false;
+    }
+
+    const startRow = Math.floor(row / 3) * 3;
+    const startCol = Math.floor(col / 3) * 3;
+    
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (board[startRow + i][startCol + j] === num) return false;
+      }
+    }
+    return true;
+  }
+  function solveSudoku() {
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
+        if (board[row][col] === '-') {
+          for (let num = 1; num <= 9; num++) {
+            const numStr = num.toString();
+            if (isValid(row, col, numStr)) {
+              board[row][col] = numStr;
+
+              if (solveSudoku()) {
+                return true;
+              }
+              board[row][col] = '-';
+            }
           }
-        }
-        if (!isSolved()) {
-          
-          
+          return false;
         }
       }
     }
+    return true;
   }
-
-  return ;
+  solveSudoku();
+  return board.map((row) => row.join(''));
 }
 
-console.log();
-
-function isSolved(resultSolve) {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Возвращает булевое значение — решено это игровое поле или нет.
-   */
-  // if (solveArr)
-  //   for (let column = 0; column < resultSolve.length; column++) {
-  //     for (let row = 0; row < resultSolve[column].length; row++) {
-  //       if (condition) {
-  //       }
-  //     }
-  //   }
-}
-
-function prettyBoard(
-  
-) {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Выводит в консоль/терминал судоку.
-   * Подумай, как симпатичнее его вывести.
-   */
-}
+console.log(solve(sudoArr));
